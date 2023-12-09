@@ -1,5 +1,8 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { commentCrawdContext } from './context/Firebase/BaseContext';
+import Dashboard from './components/Dashboard';
+
+
 function App() {
   const { handleUserAuth, currentUser } =  useContext(commentCrawdContext);
   const styles = {
@@ -18,28 +21,42 @@ function App() {
     signInHeading: `text-3xl font-bold text-[#7335c4] mb-2`,
     signInHeading2: `border-2 border-[#7335c4] rounded-full px-12 py-2 inline-block font-semibold top-10`
   }
+
+  useEffect(()=> {
+    console.log(currentUser);
+  }, [currentUser]);
   return (
-    <div className={styles.parent}>
-    <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <div className={styles.signInSection}>
-          <div className={styles.companyName}>
-            <span className={styles.themecolor}>CRAAAAWD</span>Awards
+    <div>
+      {
+        currentUser? (
+          <div>
+            <Dashboard />
           </div>
-          <div className={styles.signIn1}>
-            <h2 className={styles.signInHeading}>Sign into Twitter</h2>
-            <a className={styles.signInHeading2} onClick={handleUserAuth} href='#'>Sign In!</a>
+        ): (
+          <div className={styles.parent}>
+          <div className={styles.wrapper}>
+            <div className={styles.content}>
+              <div className={styles.signInSection}>
+                <div className={styles.companyName}>
+                  <span className={styles.themecolor}>CRAAAAWD</span>Awards
+                </div>
+                <div className={styles.signIn1}>
+                  <h2 className={styles.signInHeading}>Sign into Twitter</h2>
+                  <a className={styles.signInHeading2} onClick={handleUserAuth} href='#'>Sign In!</a>
+                </div>
+              </div>
+              <div className={styles.signInContentSection}>
+                <h2 className={styles.signInWelcome}>Hello Friend!</h2>
+                <div className={styles.signInSubWelcome}></div>
+                  <p className={styles.signInSubWelcomeInfo1}>Connect your twitter account and start journey with us.</p>
+                  {/* <a href="#" className={styles.signInSubWelcomeInfo2}>Sign Up!</a> */}
+              </div>
+            </div>
           </div>
         </div>
-        <div className={styles.signInContentSection}>
-          <h2 className={styles.signInWelcome}>Hello Friend!</h2>
-          <div className={styles.signInSubWelcome}></div>
-            <p className={styles.signInSubWelcomeInfo1}>Connect your twitter account and start journey with us.</p>
-            {/* <a href="#" className={styles.signInSubWelcomeInfo2}>Sign Up!</a> */}
-        </div>
+        )
+      }
       </div>
-    </div>
-    </div>
   );
 }
 
