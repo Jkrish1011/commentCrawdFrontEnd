@@ -10,7 +10,8 @@ const CommentCrawdProvider = ({children}) => {
     const handleUserAuth = async () => {
         try{
             const userData = await signInWithPopup(auth, provider);
-            console.log(userData.result);
+            console.log(userData);
+            
         }catch(err){
             console.error(err);
         }
