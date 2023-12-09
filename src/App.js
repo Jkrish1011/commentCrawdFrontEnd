@@ -1,23 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useContext } from 'react'
+import { commentCrawdContext } from './context/Firebase/BaseContext';
 function App() {
+  const { handleUserAuth } =  useContext(commentCrawdContext);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          I made the change
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={handleUserAuth}>
+        Login
+      </button>
     </div>
   );
 }
